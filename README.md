@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Life OS Dashboard
 
 موقع عربي RTL لإدارة الحياة الشخصية من 9 أقسام:
@@ -58,3 +59,6 @@
 - `ai-config.js`: إعدادات Gemini AI الاختيارية.
 - `market-config.js`: مصادر أسعار العملات والذهب.
 - `CREDENTIALS.md`: نظام بيانات دخول الـ 11000 مستخدم وطريقة تصدير CSV كامل.
+=======
+# Smart-Life-Manger-Website-wolf47
+>>>>>>> 4ac3e5248819b2d9ad2c60d1609fd992ebd4d6fb
