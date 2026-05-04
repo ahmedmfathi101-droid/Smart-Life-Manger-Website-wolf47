@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life OS Dashboard</title>
+  <link rel="stylesheet" href="styles.css?v=20260504-official-page-reports-1" />
+</head>
+<body>
+  <div id="authScreen" class="auth-screen">
+    <section class="auth-panel">
+      <div class="brand-mark">
+        <img class="brand-avatar brand-logo-img" src="assets/wolf47-logo.png" alt="Wolf47 logo" />
+        <div>
+          <h1>Life OS</h1>
+          <p>نظام شخصي أسود/نيون لإدارة الحياة والمال والعمل.</p>
+        </div>
+      </div>
+
+      <div class="auth-tabs" role="tablist">
+        <button class="auth-tab is-active" data-auth-tab="login" type="button">تسجيل الدخول</button>
+        <button class="auth-tab" data-auth-tab="register" type="button">تغيير كلمة المرور</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <label>
+          اسم المستخدم
+          <input id="loginEmail" type="text" autocomplete="username" required placeholder="user001" />
+        </label>
+        <label>
+          كلمة المرور
+          <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="كلمة المرور" />
+        </label>
+        <button class="primary-btn wide" type="submit">دخول</button>
+        <button id="demoLoginBtn" class="ghost-btn wide" type="button">دخول بـ user001</button>
+        <p id="loginMessage" class="form-message"></p>
+      </form>
+
+      <form id="registerForm" class="auth-form hidden">
+        <label>
+          اسم المستخدم
+          <input id="registerName" type="text" autocomplete="username" required placeholder="user001" />
+        </label>
+        <label>
+          كلمة المرور الحالية
+          <input id="registerEmail" type="password" autocomplete="current-password" required placeholder="كلمة المرور الحالية" />
+        </label>
+        <label>
+          كلمة المرور الجديدة
+          <input id="registerPassword" type="password" autocomplete="new-password" required minlength="6" placeholder="6 أحرف على الأقل" />
+        </label>
+        <button class="primary-btn wide" type="submit">حفظ كلمة المرور الجديدة</button>
+        <p id="registerMessage" class="form-message"></p>
+      </form>
+    </section>
+  </div>
+
+  <div id="appShell" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="logo-row">
+        <img class="logo-icon logo-img" src="assets/wolf47-logo.png" alt="Wolf47 logo" />
+        <div>
+          <h2>Life OS</h2>
+          <p>Dashboard</p>
+        </div>
+      </div>
+      <nav id="sideNav" class="side-nav" aria-label="أقسام الموقع"></nav>
+      <div class="side-quote">
+        <strong>حياة متوازنة</strong>
+        <span>هي حياة ناجحة</span>
+        <div class="quote-plant">⌁</div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="date-pill">
+          <span>▣</span>
+          <button id="datePickerBtn" type="button">الخميس، 30 أبريل 2026</button>
+        </div>
+        <div class="top-actions">
+          <button id="searchBtn" class="icon-btn" type="button" aria-label="بحث">⌕</button>
+          <button id="notificationsBtn" class="icon-btn has-badge" type="button" aria-label="التنبيهات">⚠</button>
+          <button id="exportReportBtn" class="outline-btn" type="button">تصدير PDF</button>
+          <button id="quickAddBtn" class="primary-btn" type="button">إضافة مهمة +</button>
+          <div class="profile-chip">
+            <img id="topProfileImage" alt="صورة المستخدم" />
+            <div>
+              <strong id="topUserName">مرحبا</strong>
+              <span id="topUserSubtitle">لديك يوم رائع</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="content" class="content"></section>
+    </main>
+  </div>
+
+  <dialog id="entryDialog" class="modal">
+    <form id="entryForm" method="dialog" class="modal-card">
+      <header>
+        <div>
+          <h3 id="entryDialogTitle">إضافة سجل</h3>
+          <p id="entryDialogSubtitle">اختر النوع واملأ البيانات.</p>
+        </div>
+        <button class="icon-btn" value="cancel" type="submit" aria-label="إغلاق">×</button>
+      </header>
+      <div id="entryFormFields" class="form-grid"></div>
+      <footer>
+        <button class="ghost-btn" value="cancel" type="submit">إلغاء</button>
+        <button id="saveEntryBtn" class="primary-btn" value="default" type="submit">حفظ</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="quickTaskDialog" class="modal">
+    <form id="quickTaskForm" method="dialog" class="modal-card">
+      <header>
+        <div>
+          <h3>إضافة مهمة أو أولوية</h3>
+          <p>ستظهر في الرئيسية، الأولويات، والتقارير.</p>
+        </div>
+        <button class="icon-btn" value="cancel" type="submit" aria-label="إغلاق">×</button>
+      </header>
+      <div class="form-grid">
+        <label>
+          عنوان المهمة
+          <input name="title" required placeholder="مثال: مذاكرة SQL لمدة ساعة" />
+        </label>
+        <label>
+          القسم
+          <select name="domain" required></select>
+        </label>
+        <label>
+          الأهمية
+          <select name="importance">
+            <option value="high">مهمة</option>
+            <option value="low">غير مهمة</option>
+          </select>
+        </label>
+        <label>
+          الاستعجال
+          <select name="urgency">
+            <option value="urgent">عاجلة</option>
+            <option value="later">غير عاجلة</option>
+          </select>
+        </label>
+        <label>
+          الموعد
+          <input name="due" type="time" />
+        </label>
+        <label>
+          الحالة
+          <select name="status">
+            <option value="todo">لم تبدأ</option>
+            <option value="doing">قيد التنفيذ</option>
+            <option value="done">مكتملة</option>
+          </select>
+        </label>
+      </div>
+      <footer>
+        <button class="ghost-btn" value="cancel" type="submit">إلغاء</button>
+        <button class="primary-btn" value="default" type="submit">حفظ المهمة</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="searchDialog" class="modal">
+    <div class="modal-card">
+      <header>
+        <div>
+          <h3>بحث شامل</h3>
+          <p>ابحث داخل المهام والمدخلات المحفوظة.</p>
+        </div>
+        <button id="closeSearchBtn" class="icon-btn" type="button" aria-label="إغلاق">×</button>
+      </header>
+      <input id="globalSearchInput" class="search-input" placeholder="اكتب كلمة البحث..." />
+      <div id="searchResults" class="search-results"></div>
+    </div>
+  </dialog>
+
+  <dialog id="notificationsDialog" class="modal">
+    <div class="modal-card">
+      <header>
+        <div>
+          <h3>مركز التنبيهات</h3>
+          <p>تنبيهات مرتبة حسب القسم والأولوية.</p>
+        </div>
+        <button id="closeNotificationsBtn" class="icon-btn" type="button" aria-label="إغلاق">×</button>
+      </header>
+      <div id="notificationsContent" class="notifications-content"></div>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="firebase-config.js?v=20260504-official-page-reports-1"></script>
+  <script src="ai-config.js?v=20260504-official-page-reports-1"></script>
+  <script src="market-config.js?v=20260504-official-page-reports-1"></script>
+  <script src="app.js?v=20260504-official-page-reports-1"></script>
+</body>
+</html>
